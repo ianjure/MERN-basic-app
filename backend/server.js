@@ -7,7 +7,7 @@ dotenv.config();
 
 const app = express();
 
-app.post("/products", async (req, res) => {
+app.post("/api/products", async (req, res) => {
     const product = req.body; // req.body is the data that is sent with the POST request by the user
 
     if(!product.name || !product.price || !product.image) { // check if any of the fields are missing
