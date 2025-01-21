@@ -3,9 +3,9 @@ import dotenv from "dotenv";
 import { connectDB } from "./config/db.js";
 import Product from "./models/product.model.js";
 
-dotenv.config();
+dotenv.config(); // allows us to use environment variables in the .env file
 
-const app = express();
+const app = express(); // create an instance of express
 
 app.use(express.json()); // allows us to accept JSON data in the body of the request (req.body)
 
@@ -27,8 +27,10 @@ app.post("/api/products", async (req, res) => {
     }
 });
 
-app.listen(5000, () => {
-    connectDB();
+// CREATE NEW ENDPOINT HERE
+
+app.listen(5000, () => { // start the server on port 5000
+    connectDB(); // connect to the database
     console.log("Server is running on http://localhost:5000");
 });
 
