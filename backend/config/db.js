@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from "mongoose"; // import mongoose to connect to the database
 
 export const connectDB = async () => { // async function to connect to the database
     try {

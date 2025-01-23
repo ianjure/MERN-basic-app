@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from "mongoose"; // import mongoose to create a model
 
 const productSchema = mongoose.Schema({ // create a schema for the product
     name: {
