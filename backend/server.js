@@ -9,14 +9,13 @@ dotenv.config(); // allows us to use environment variables in the .env file
 
 const app = express(); // create an instance of express
 const PORT = process.env.PORT || 5000; // set the port to the environment variable PORT or 5000
-const __dirname = path.resolve();
+const __dirname = path.resolve(); // directory path needed for production
 
 app.use(express.json()); // allows us to accept JSON data in the body of the request (req.body)
 app.use("/api/products", productRoutes); // use the product routes with the /api/products prefix
 
 if(process.env.NODE_ENV === "production") { // code snippet for production deployment
     app.use(express.static(path.join(__dirname, "/frontend/dist")));
-
     app.get("*", (req, res) => {
         res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
     })
