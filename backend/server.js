@@ -14,7 +14,7 @@ const __dirname = path.resolve(); // directory path needed for production
 app.use(express.json()); // allows us to accept JSON data in the body of the request (req.body)
 app.use("/api/products", productRoutes); // use the product routes with the /api/products prefix
 
-if(process.env.NODE_ENV === "production") { // code snippet for production deployment
+if(process.env.NODE_ENV === "development") { // code snippet for production deployment
     app.use(express.static(path.join(__dirname, "/frontend/dist")));
     app.get("*", (req, res) => {
         res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
@@ -26,4 +26,4 @@ app.listen(PORT, () => { // start the server on port 5000
     console.log("Server is running on http://localhost:" + PORT);
 });
 
-// TO RUN: npm run build
+// TO RUN: npm run dev
