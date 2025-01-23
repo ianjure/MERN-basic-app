@@ -1,5 +1,7 @@
+import { useProductStore } from "@/store/product";
 import { Container, VStack, Heading, Box, Input, Button, useColorModeValue } from "@chakra-ui/react";
 import { useState } from "react";
+import { useProducStore } from "../store/product.js";
 
 const CreatePage = () => {
     const [newProduct, setNewProduct] = useState({ // newProduct is an object with three properties: name, price, and image
@@ -8,8 +10,12 @@ const CreatePage = () => {
         image: "",
     });
 
-    const handleAddProduct = () => {
-        console.log(newProduct);
+    const { createProduct } = useProductStore(); // use the session state function
+
+    const handleAddProduct = async () => { // function to add a new product
+        const {success, message} = await createProduct(newProduct); // call the createProduct function
+        console.log("Success:", success);
+        console.log("Message:", message);
     };
 
     return (
