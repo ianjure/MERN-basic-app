@@ -12,4 +12,4 @@ router.put("/:id", updateProduct); // use the updateProduct controller to handle
 
 router.delete("/:id", deleteProduct); // use the deleteProduct controller to handle the request
 
-export default router; // export the router so that it can be used in other files
+export default router; // export the router so that it can be used in other files, using default we can import it with any name in other files
