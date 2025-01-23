@@ -1,4 +1,4 @@
-import { Container, VStack, Heading, Box, Input, useColorModeValue } from "@chakra-ui/react";
+import { Container, VStack, Heading, Box, Input, Button, useColorModeValue } from "@chakra-ui/react";
 import { useState } from "react";
 
 const CreatePage = () => {
@@ -14,16 +14,17 @@ const CreatePage = () => {
 
     return (
         <Container maxW={"container.sm"}>
-            <VStack spacing={8}>
+            <VStack spacing={2}>
                 <Heading
                     as={"h1"}
                     size={"2xl"}
                     textAlign={"center"}
-                    mb={8}
+                    mt={12}
+                    mb={4}
                     >
                     Create New Product
                 </Heading>
-                
+
                 <Box
                     w={"full"}
                     bg={useColorModeValue("white", "gray.800")}

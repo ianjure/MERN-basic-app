@@ -1,6 +1,5 @@
-import { Box } from "@chakra-ui/react";
+import { Box, useColorModeValue } from "@chakra-ui/react";
 import { Route, Routes } from "react-router-dom";
-import { useColorModeValue } from '@chakra-ui/react';
 
 import Navbar from "./components/Navbar.jsx";
 import HomePage from "./pages/HomePage.jsx";
@@ -15,7 +14,7 @@ function App() {
         <Route path="/create" element={<CreatePage />} />
       </Routes>
     </Box>
-  );
-}
+  )
+};
 
 export default App;
