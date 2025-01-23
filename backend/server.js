@@ -9,6 +9,17 @@ const app = express(); // create an instance of express
 
 app.use(express.json()); // allows us to accept JSON data in the body of the request (req.body)
 
+// Route: GET /api/products - Get all Products
+app.get("/api/products", async (req, res) => {
+    try {
+        const products = await Product.find({}); // find all products in the database - if you pass {} it will return all products
+        res.status(200).json({ success: true, data: products });
+    } catch (error) {
+        console.error("Error in getting products: ", error.message);
+        res.status(500).json({ success: false, message: "Internal server error." });
+    }
+});
+
 // Route: POST /api/products - Create a Product
 app.post("/api/products", async (req, res) => {
     const product = req.body; // req.body is the data that is sent with the POST request by the user
@@ -37,17 +48,6 @@ app.delete("/api/products/:id", async (req, res) => { // :id is a URL parameter 
         res.status(200).json({ success: true, message: "Product deleted successfully." });
     } catch (error) {
         res.status(404).json({ success: false, message: "Product not found." });
-    }
-});
-
-// Route: GET /api/products - Get all Products
-app.get("/api/products", async (req, res) => {
-    try {
-        const products = await Product.find(); // find all products in the database
-        res.status(200).json({ success: true, data: products });
-    } catch (error) {
-        console.error("Error in getting products: ", error.message);
-        res.status(500).json({ success: false, message: "Internal server error." });
     }
 });
 
