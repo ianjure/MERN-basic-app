@@ -41,7 +41,7 @@ app.post("/api/products", async (req, res) => {
 });
 
 // Route: PUT /api/products/:id - Update a Product
-app.put("/api/products/:id", async (req, res) => {
+app.put("/api/products/:id", async (req, res) => { // :id is a URL parameter (dynamic and can be any value)
     const {id} = req.params; // get the id from the URL - {what you passed in the URL}
     const product = req.body; // get the updated data from the body of the request
 
