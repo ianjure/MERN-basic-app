@@ -1,4 +1,5 @@
 import express from "express";
+import mongoose from "mongoose";
 import dotenv from "dotenv";
 import { connectDB } from "./config/db.js";
 import Product from "./models/product.model.js";
@@ -39,7 +40,24 @@ app.post("/api/products", async (req, res) => {
     }
 });
 
-// Route: DELETE /api/products - Delete a Product
+// Route: PUT /api/products/:id - Update a Product
+app.put("/api/products/:id", async (req, res) => {
+    const {id} = req.params; // get the id from the URL - {what you passed in the URL}
+    const product = req.body; // get the updated data from the body of the request
+
+    if(!mongoose.Types.ObjectId.isValid(id)) { // check if the id is not from a valid Product in the database
+        return res.status(404).json({ success: false, message: "Product not found." });
+    }
+
+    try {
+        const updatedProduct = await Product.findByIdAndUpdate(id, product, { new: true }); // find the product by id and update it with the new data
+        res.status(200).json({ success: true, data: updatedProduct });
+    } catch (error) {
+        res.status(500).json({ success: false, message: "Internal server error." });
+    }
+});
+
+// Route: DELETE /api/products/:id - Delete a Product
 app.delete("/api/products/:id", async (req, res) => { // :id is a URL parameter (dynamic and can be any value)
     const {id} = req.params; // get the id from the URL - {what you passed in the URL}
 
