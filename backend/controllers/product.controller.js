@@ -37,7 +37,7 @@ export const updateProduct = async (req, res) => { // :id is a URL parameter (dy
     const {id} = req.params; // get the id from the URL - {what you passed in the URL}
     const product = req.body; // get the updated data from the body of the request
 
-    if(!mongoose.Types.ObjectId.isValid(id)) { // check if the id is not from a valid Product in the database
+    if(!mongoose.Types.ObjectId.isValid(id)) { // check if id does not exist in the database
         return res.status(404).json({ success: false, message: "Product not found." });
     }
 
@@ -53,10 +53,14 @@ export const updateProduct = async (req, res) => { // :id is a URL parameter (dy
 export const deleteProduct = async (req, res) => { // :id is a URL parameter (dynamic and can be any value)
     const {id} = req.params; // get the id from the URL - {what you passed in the URL}
 
+    if(!mongoose.Types.ObjectId.isValid(id)) { // check if id does not exist in the database
+        return res.status(404).json({ success: false, message: "Product not found." });
+    }
+
     try {
         await Product.findByIdAndDelete(id); // find the product by id through the Product model then delete it
         res.status(200).json({ success: true, message: "Product deleted successfully." });
     } catch (error) {
-        res.status(404).json({ success: false, message: "Product not found." });
+        res.status(500).json({ success: false, message: "Internal server error." });
     }
 };
