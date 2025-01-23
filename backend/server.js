@@ -7,14 +7,15 @@ import productRoutes from "./routes/product.route.js"; // import the product rou
 dotenv.config(); // allows us to use environment variables in the .env file
 
 const app = express(); // create an instance of express
+const PORT = process.env.PORT || 5000; // set the port to the environment variable PORT or 5000
 
 app.use(express.json()); // allows us to accept JSON data in the body of the request (req.body)
 
 app.use("/api/products", productRoutes); // use the product routes with the /api/products prefix
 
-app.listen(5000, () => { // start the server on port 5000
+app.listen(PORT, () => { // start the server on port 5000
     connectDB(); // connect to the database
-    console.log("Server is running on http://localhost:5000");
+    console.log("Server is running on http://localhost:" + PORT);
 });
 
 // TO RUN: npm run dev
