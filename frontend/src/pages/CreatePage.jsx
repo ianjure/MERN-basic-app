@@ -11,9 +11,9 @@ const CreatePage = () => {
 
     const toast = useToast(); // use the toast function from Chakra UI
 
-    const { createProduct } = useProductStore(); // use the session state function
+    const { createProduct } = useProductStore(); // get the createProduct function
 
-    const handleAddProduct = async () => { // function to add a new product
+    const handleAddProduct = async () => { // function to handle adding a new product
         const {success, message} = await createProduct(newProduct); // call the createProduct function
 
         if(!success) { // if the product was not created successfully, show an error toast
@@ -21,6 +21,7 @@ const CreatePage = () => {
                 title: "Error",
                 description: message,
                 status: "error",
+                duration: 2500,
                 isClosable: true
             })
         } else { // if the product was created successfully, show a success toast
@@ -28,6 +29,7 @@ const CreatePage = () => {
                 title: "Success",
                 description: message,
                 status: "success",
+                duration: 2500,
                 isClosable: true
             })
         }

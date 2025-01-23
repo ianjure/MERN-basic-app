@@ -1,9 +1,36 @@
-import { Box, Image, Heading, Text, HStack, IconButton, useColorModeValue } from "@chakra-ui/react";
+import { Box, Image, Heading, Text, HStack, IconButton, useColorModeValue, useToast } from "@chakra-ui/react";
 import { EditIcon, DeleteIcon } from "@chakra-ui/icons";
+import { useProductStore } from "../store/product.js";
 
 const ProductCard = ({product}) => {
     const textColor = useColorModeValue("gray.800", "white"); // for text color: black in light mode, white in dark mode
     const bgColor = useColorModeValue("white", "gray.800"); // for background color: white in light mode, gray.800 in dark mode
+
+    const toast = useToast(); // use the toast function from Chakra UI
+
+    const { deleteProduct } = useProductStore(); // get the deleteProduct function
+
+    const handleDeleteProduct = async (id) => { // function to handle deleting a product
+        const {success, message} = await deleteProduct(id); // call the deleteProduct function
+
+        if(!success) { // if the product was not deleted successfully, show an error toast
+            toast({
+                title: "Error",
+                description: message,
+                status: "error",
+                duration: 2500,
+                isClosable: true
+            })
+        } else { // if the product was deleted successfully, show a success toast
+            toast({
+                title: "Success",
+                description: message,
+                status: "success",
+                duration: 2500,
+                isClosable: true
+            })
+        }
+    };
 
     return (
         <Box
@@ -43,7 +70,7 @@ const ProductCard = ({product}) => {
 
                 <HStack spacing={2}>
                     <IconButton icon={<EditIcon />} colorScheme={"blue"}/>
-                    <IconButton icon={<DeleteIcon />} colorScheme={"red"}/>
+                    <IconButton icon={<DeleteIcon />} onClick={() => handleDeleteProduct(product._id)} colorScheme={"red"}/>
                 </HStack>
             </Box>
         </Box>

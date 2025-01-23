@@ -2,7 +2,7 @@ import { create } from "zustand";
 
 export const useProductStore = create((set) => ({
     products: [], // list of products
-    setProducts: (products) => set({ products }), // set products
+    setProducts: (products) => set({ products }), // set products that acts like a session state from streamlit
     createProduct: async (newProduct) => { // FUNCTION - create a new product
         if(!newProduct.name || !newProduct.price || !newProduct.image) { // check if all fields are filled
             return { success: false, message: "All fields are required." };
@@ -22,5 +22,15 @@ export const useProductStore = create((set) => ({
         const res = await fetch("/api/products"); // send a POST request to the backend
         const data = await res.json(); // get the response from the backend
         set({ products: data.data }); // set the products list
+    },
+    deleteProduct: async (id) => { // FUNCTION - delete a product
+        const res = await fetch(`/api/products/${id}`, { method: "DELETE" }); // send a DELETE request to the backend
+        const data = await res.json(); // get the response from the backend
+        if(!data.success) {
+            return { success: false, message: data.message }; // if the product was not deleted successfully, return an error
+        };
+        // update the UI without needing a refresh
+        set(state => ({ products: state.products.filter(product => product._id !== id) })); // remove it from the products list by filtering and choosing only the id not equal to the passed id
+        return { success: true, message: data.message }; // if the product was deleted successfully, return a success message
     }
 }));

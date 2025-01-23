@@ -5,7 +5,7 @@ import Product from "../models/product.model.js"; // import the Product model
 // Route: GET /api/products - Get all Products
 export const getProducts = async (req, res) => {
     try {
-        const products = await Product.find({}); // find all products in the database - if you pass {} it will return all products
+        const products = await Product.find({}).sort({ createdAt: -1 }); // find all products in the database - if you pass {} it will return all products - sort by createdAt in descending order
         res.status(200).json({ success: true, data: products });
     } catch (error) {
         console.error("Error in getting products: ", error.message);
