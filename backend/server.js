@@ -25,3 +25,5 @@ app.listen(PORT, () => { // start the server on port 5000
     connectDB(); // connect to the database
     console.log("Server is running on http://localhost:" + PORT);
 });
+
+// TO RUN: npm run build
