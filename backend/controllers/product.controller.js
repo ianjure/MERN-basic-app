@@ -1,4 +1,5 @@
 import mongoose from "mongoose"; // import mongoose to interact with the database
+
 import Product from "./models/product.model.js"; // import the Product model
 
 // Route: GET /api/products - Get all Products

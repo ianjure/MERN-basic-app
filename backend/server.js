@@ -1,5 +1,6 @@
 import express from "express"; // import express to use its functionality
 import dotenv from "dotenv"; // import the dotenv package to use environment variables
+
 import { connectDB } from "./config/db.js"; // import the named connectDB function from the db.js file
 import productRoutes from "./routes/product.route.js"; // import the product routes from the product.route.js file
 

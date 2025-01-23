@@ -1,9 +1,6 @@
 import express from "express"; // import express to use its Router class
 
-import { getProducts } from "../controllers/product.controller.js"; // import the getProducts controller
-import { createProduct } from "../controllers/product.controller.js"; // import the createProduct controller
-import { updateProduct } from "../controllers/product.controller.js"; // import the updateProduct controller
-import { deleteProduct } from "../controllers/product.controller.js"; // import the deleteProduct controller
+import { getProducts, createProduct, updateProduct, deleteProduct } from "../controllers/product.controller.js"; // import the controllers
 
 const router = express.Router(); // create a new router
 
