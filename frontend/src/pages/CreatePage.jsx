@@ -1,4 +1,3 @@
-import { useProductStore } from "@/store/product";
 import { Container, VStack, Heading, Box, Input, Button, useColorModeValue } from "@chakra-ui/react";
 import { useState } from "react";
 import { useProductStore } from "../store/product.js";
