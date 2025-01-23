@@ -1,5 +1,6 @@
 BACKEND
-- Express.js
+- Express
+- MongoDB
 
 FRONTEND
 - React
