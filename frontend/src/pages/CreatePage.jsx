@@ -1,7 +1,7 @@
 import { useProductStore } from "@/store/product";
 import { Container, VStack, Heading, Box, Input, Button, useColorModeValue } from "@chakra-ui/react";
 import { useState } from "react";
-import { useProducStore } from "../store/product.js";
+import { useProductStore } from "../store/product.js";
 
 const CreatePage = () => {
     const [newProduct, setNewProduct] = useState({ // newProduct is an object with three properties: name, price, and image
