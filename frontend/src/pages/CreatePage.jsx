@@ -1,4 +1,4 @@
-import { Container, VStack, Heading, Box, Input, Button, useColorModeValue } from "@chakra-ui/react";
+import { Container, VStack, Heading, Box, Input, Button, useToast, useColorModeValue } from "@chakra-ui/react";
 import { useState } from "react";
 import { useProductStore } from "../store/product.js";
 
@@ -9,12 +9,29 @@ const CreatePage = () => {
         image: "",
     });
 
+    const toast = useToast(); // use the toast function from Chakra UI
+
     const { createProduct } = useProductStore(); // use the session state function
 
     const handleAddProduct = async () => { // function to add a new product
         const {success, message} = await createProduct(newProduct); // call the createProduct function
-        console.log("Success:", success);
-        console.log("Message:", message);
+
+        if(!success) { // if the product was not created successfully, show an error toast
+            toast({
+                title: "Error",
+                description: message,
+                status: "error",
+                isClosable: true
+            })
+        } else { // if the product was created successfully, show a success toast
+            toast({
+                title: "Success",
+                description: message,
+                status: "success",
+                isClosable: true
+            })
+        }
+        setNewProduct({ name: "", price: "", image: "" }); // reset the input fields
     };
 
     return (
