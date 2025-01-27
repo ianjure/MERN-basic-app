@@ -1,6 +1,10 @@
 import mongoose from "mongoose"; // import mongoose to create a model
 
 const productSchema = mongoose.Schema({ // create a schema for the product
+    user: {
+        type: String,
+        required: true
+    },
     name: {
         type: String,
         required: true

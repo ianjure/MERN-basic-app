@@ -6,7 +6,7 @@ const CreatePage = () => {
     const [newProduct, setNewProduct] = useState({ // newProduct is an object with three properties: name, price, and image
         name: "",
         price: "",
-        image: "",
+        image: ""
     });
 
     const toast = useToast(); // use the toast function from Chakra UI

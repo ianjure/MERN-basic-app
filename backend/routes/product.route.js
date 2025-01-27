@@ -5,8 +5,8 @@ import { getProducts, createProduct, updateProduct, deleteProduct } from "../con
 const router = express.Router(); // create a new router
 
 // PRODUCTS: define the routes and the controllers to handle the requests
-router.get("/", getProducts); // use the getProducts controller
-router.post("/", createProduct); // use the createProduct controller
+router.get("/home", getProducts); // use the getProducts controller
+router.post("/create", createProduct); // use the createProduct controller
 router.put("/:id", updateProduct); // use the updateProduct controller
 router.delete("/:id", deleteProduct); // use the deleteProduct controller
 

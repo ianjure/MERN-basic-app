@@ -1,8 +1,9 @@
 import mongoose from "mongoose"; // import mongoose to interact with the database
 
+import User from "../models/user.model.js"; // import the User model
 import Product from "../models/product.model.js"; // import the Product model
 
-// Route: GET /api/products - Get all Products
+// Route: GET /api/products/home - Get all Products
 export const getProducts = async (req, res) => {
     try {
         const products = await Product.find({}).sort({ createdAt: -1 }); // find all products in the database - if you pass {} it will return all products - sort by createdAt in descending order
@@ -13,22 +14,28 @@ export const getProducts = async (req, res) => {
     }
 };
 
-// Route: POST /api/products - Create a Product
+// Route: POST /api/products/create - Create a Product
 export const createProduct = async (req, res) => {
     const product = req.body; // req.body is the data that is sent with the POST request by the user
 
-    if(!product.name || !product.price || !product.image) { // check if any of the fields are missing
+    if(!product.user || !product.name || !product.price || !product.image) { // check if any of the fields are missing
         return res.status(400).json({ success: false, message: "Please provide all fields." });
     }
 
-    const newProduct = new Product(product); // create a new product with the data sent by the user
+    const existingUser = await User.findOne({ username: product.user }); // check if the user exists in the database
 
-    try {
-        await newProduct.save(); // save the product to the database
-        res.status(201).json({ success: true, data: newProduct });
-    } catch (error) {
-        console.error("Error in creating product: ", error.message);
-        res.status(500).json({ success: false, message: "Internal server error." });
+    if (!existingUser) {
+        res.status(400).json({ success: false, message: "User does not exists." });
+    } else {
+        const newProduct = new Product(product); // create a new product with the data sent by the user
+
+        try {
+            await newProduct.save(); // save the product to the database
+            res.status(201).json({ success: true, data: newProduct });
+        } catch (error) {
+            console.error("Error in creating product: ", error.message);
+            res.status(500).json({ success: false, message: "Internal server error." });
+        }
     }
 };
 

@@ -2,7 +2,7 @@ import { Container, VStack, Heading, Box, Input, Button, useToast, useColorModeV
 import { useState } from "react";
 import { useProductStore } from "../store/product.js";
 
-const CreatePage = () => {
+const LoginPage = () => {
     const [newProduct, setNewProduct] = useState({ // newProduct is an object with three properties: name, price, and image
         name: "",
         price: "",

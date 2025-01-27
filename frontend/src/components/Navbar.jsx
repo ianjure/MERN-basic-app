@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { PlusSquareIcon } from "@chakra-ui/icons";
 import { IoMoon } from "react-icons/io5";
 import { LuSun } from "react-icons/lu";
+import { HiLogout } from "react-icons/hi";
 
 const Navbar = () => {
     const { colorMode, toggleColorMode } = useColorMode(); // for toggling between light and dark mode
@@ -38,6 +39,11 @@ const Navbar = () => {
                     <Button onClick={toggleColorMode}>
                         {colorMode === "light" ? <IoMoon size="20" /> : <LuSun size="20" />}
                     </Button>
+                    <Link to={"/login"}>
+                        <Button>
+                            <HiLogout size="20" />
+                        </Button>
+                    </Link>
                 </HStack>
             </Flex>
         </Container>
