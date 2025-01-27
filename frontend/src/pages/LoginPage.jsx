@@ -1,39 +1,19 @@
 import { Container, VStack, Heading, Box, Input, Button, useToast, useColorModeValue } from "@chakra-ui/react";
 import { useState } from "react";
-import { useProductStore } from "../store/product.js";
 
 const LoginPage = () => {
-    const [newProduct, setNewProduct] = useState({ // newProduct is an object with three properties: name, price, and image
-        name: "",
-        price: "",
-        image: "",
-    });
+    // State variables
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [currentUser, setCurrentUser] = useState(null);
 
-    const toast = useToast(); // use the toast function from Chakra UI
-    const { createProduct } = useProductStore(); // get the created createProduct hook
-
-    const handleAddProduct = async () => { // function to handle adding a new product
-        const {success, message} = await createProduct(newProduct); // call the createProduct hook
-
-        if(!success) { // if the product was not created successfully, show an error toast
-            toast({
-                title: "Error",
-                description: message,
-                status: "error",
-                duration: 2500,
-                isClosable: true
-            })
-        } else { // if the product was created successfully, show a success toast
-            toast({
-                title: "Success",
-                description: message,
-                status: "success",
-                duration: 2500,
-                isClosable: true
-            })
-        }
-        setNewProduct({ name: "", price: "", image: "" }); // reset the input fields
-    };
+    // Function that will return current user and also update current username
+    const getCurrentUser = async function () {
+        const currentUser = await Parse.User.current();
+        // Update state variable holding current user
+        setCurrentUser(currentUser);
+        return currentUser;
+        };
 
     return (
         <Container maxW={"container.sm"}>
@@ -45,7 +25,7 @@ const LoginPage = () => {
                     mt={12}
                     mb={4}
                     >
-                    Create New Product
+                    Login
                 </Heading>
 
                 <Box
@@ -57,10 +37,10 @@ const LoginPage = () => {
                     >
                     <VStack spacing={4}>
                         <Input
-                            name="name"
-                            placeholder="Product Name"
+                            name="username"
+                            placeholder="Username"
                             value={newProduct.name}
-                            onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })}
+                            onChange={(event) => setUsername(event.target.value)}
                             />
                         <Input
                             name="price"

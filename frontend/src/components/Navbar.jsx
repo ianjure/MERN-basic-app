@@ -30,6 +30,19 @@ const Navbar = () => {
                     </Link>
                 </Text>
 
+                <Text
+                    fontSize={{ base: "22", sm: "28" }}
+                    fontWeight={"bold"}
+                    textTransform={"uppercase"}
+                    textAlign={"center"}
+                    bgGradient={"linear(to-r, cyan.400, blue.500)"}
+                    bgClip={"text"}
+                    >
+                    <Link to={"/"}>
+                        Store 🛒
+                    </Link>
+                </Text>
+
                 <HStack spacing={4} alignItems={"center"}>
                     <Link to={"/create"}>
                         <Button>
